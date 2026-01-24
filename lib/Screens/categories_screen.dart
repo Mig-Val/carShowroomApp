@@ -9,8 +9,9 @@ class CategoriesScreen extends StatelessWidget {
     final categories = Category.values;
 
     return Scaffold(
+      backgroundColor: const Color(0xFF2B2B2B), // dark gray
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 57, 47, 150),
+        backgroundColor: const Color.fromARGB(255, 132, 119, 248),
         title: const Text('Car Showroom'),
         actions: [
           IconButton(
@@ -32,13 +33,19 @@ class CategoriesScreen extends StatelessWidget {
           final category = categories[index];
 
           return Card(
+            color: categoryColor(category),
             elevation: 4,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
             child: Center(
               child: Text(
-                category.name.toUpperCase(),
+                categoryDisplayName(category),
+                textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
+                  color: Color(0xFF2B2B2B),
                 ),
               ),
             ),
