@@ -65,7 +65,12 @@ class Car {
   final String name;
   final Category category;
   final String imagePath;
+  final bool isAssetImage;
 
-  Car({required this.name, required this.category, required this.imagePath})
-    : id = uuid.v4();
+  Car({
+    required this.name,
+    required this.category,
+    required this.imagePath,
+    this.isAssetImage = true,
+  }) : id = uuid.v4();
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Model/car.dart';
+import 'cars_screen.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key});
@@ -32,20 +33,30 @@ class CategoriesScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           final category = categories[index];
 
-          return Card(
-            color: categoryColor(category),
-            elevation: 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Center(
-              child: Text(
-                categoryDisplayName(category),
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF2B2B2B),
+          return InkWell(
+            borderRadius: BorderRadius.circular(12),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => CarsScreen(category: category),
+                ),
+              );
+            },
+            child: Card(
+              color: categoryColor(category),
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(
+                child: Text(
+                  categoryDisplayName(category),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF2B2B2B),
+                  ),
                 ),
               ),
             ),
