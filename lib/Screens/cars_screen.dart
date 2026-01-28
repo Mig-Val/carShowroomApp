@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../Model/car.dart';
 import '../Data/dummy_data.dart';
+import 'dart:io';
 
 class CarsScreen extends StatelessWidget {
   final Category category;
@@ -44,20 +45,19 @@ class CarsScreen extends StatelessWidget {
                   borderRadius: const BorderRadius.vertical(
                     bottom: Radius.circular(12),
                   ),
-                  child: Image.asset(
-                    car.imagePath,
-                    width: double.infinity,
-                    height: 180,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return const SizedBox(
-                        height: 180,
-                        child: Center(
-                          child: Icon(Icons.directions_car, size: 40),
+                  child: car.isAssetImage
+                      ? Image.asset(
+                          car.imagePath,
+                          width: double.infinity,
+                          height: 180,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.file(
+                          File(car.imagePath),
+                          width: double.infinity,
+                          height: 180,
+                          fit: BoxFit.cover,
                         ),
-                      );
-                    },
-                  ),
                 ),
               ],
             ),

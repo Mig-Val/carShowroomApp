@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../Model/car.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 class AddCar extends StatefulWidget {
   final void Function(Car car) onAddCar;
@@ -12,13 +14,27 @@ class AddCar extends StatefulWidget {
 
 class _AddCarState extends State<AddCar> {
   final _nameController = TextEditingController();
-  final _imagePathController = TextEditingController();
+  //final _imagePathController = TextEditingController();
+  File? _pickedImage;
 
   Category _selectedCategory = Category.hatchBack;
 
+  Future<void> _takePhoto() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(
+      source: ImageSource.camera,
+      imageQuality: 80,
+    );
+
+    if (pickedFile == null) return;
+
+    setState(() {
+      _pickedImage = File(pickedFile.path);
+    });
+  }
+
   void _submit() {
-    if (_nameController.text.trim().isEmpty ||
-        _imagePathController.text.trim().isEmpty) {
+    if (_nameController.text.trim().isEmpty || _pickedImage == null) {
       return;
     }
 
@@ -26,7 +42,8 @@ class _AddCarState extends State<AddCar> {
       Car(
         name: _nameController.text.trim(),
         category: _selectedCategory,
-        imagePath: _imagePathController.text.trim(),
+        imagePath: _pickedImage!.path,
+        isAssetImage: false,
       ),
     );
 
@@ -49,12 +66,21 @@ class _AddCarState extends State<AddCar> {
             controller: _nameController,
             decoration: const InputDecoration(labelText: 'Car name'),
           ),
-          TextField(
-            controller: _imagePathController,
-            decoration: const InputDecoration(
-              labelText: 'Image path (temporary)',
-            ),
+          const SizedBox(height: 12),
+          ElevatedButton.icon(
+            onPressed: _takePhoto,
+            icon: const Icon(Icons.camera_alt),
+            label: const Text('Take Photo'),
           ),
+          const SizedBox(height: 12),
+          if (_pickedImage != null)
+            Image.file(
+              _pickedImage!,
+              height: 150,
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
+
           const SizedBox(height: 12),
           DropdownButton<Category>(
             value: _selectedCategory,
