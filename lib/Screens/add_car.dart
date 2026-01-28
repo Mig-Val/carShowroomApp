@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:miguel_valentino_showroom/Services/NotificationServices';
 import '../Model/car.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
@@ -48,6 +49,7 @@ class _AddCarState extends State<AddCar> {
     );
 
     Navigator.of(context).pop();
+    NotificationService.showCarAddedNotification(_nameController.text.trim());
   }
 
   @override

@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "408225466148",
+    "firebase_url": "https://swd61amiguel-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "swd61amiguel",
+    "storage_bucket": "swd61amiguel.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408225466148:android:b42cbf708f1dfa049955b1",
+        "android_client_info": {
+          "package_name": "com.example.miguel_valentino_showroom"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWvmsYxEYvNyuyD6oCzlltXe0thVxK9iw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
