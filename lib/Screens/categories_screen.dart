@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:miguel_valentino_showroom/Services/car_hive_service.dart';
 import '../Model/car.dart';
 import 'cars_screen.dart';
-import '../Data/dummy_data.dart';
 import 'add_car.dart';
 
 class CategoriesScreen extends StatefulWidget {
@@ -12,19 +12,17 @@ class CategoriesScreen extends StatefulWidget {
 }
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
+  void addCar(Car c) {
+    setState(() {
+      CarHiveService.addCar(c);
+    });
+  }
+
   void _openAddCar() {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      builder: (_) {
-        return AddCar(
-          onAddCar: (car) {
-            setState(() {
-              dummyCars.add(car);
-            });
-          },
-        );
-      },
+      builder: (_) => AddCar(onAddCar: addCar),
     );
   }
 

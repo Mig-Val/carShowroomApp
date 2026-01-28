@@ -35,20 +35,19 @@ class _AddCarState extends State<AddCar> {
   }
 
   void _submit() {
-    if (_nameController.text.trim().isEmpty || _pickedImage == null) {
-      return;
-    }
+    if (_nameController.text.trim().isEmpty || _pickedImage == null) return;
 
-    widget.onAddCar(
-      Car(
-        name: _nameController.text.trim(),
-        category: _selectedCategory,
-        imagePath: _pickedImage!.path,
-        isAssetImage: false,
-      ),
+    final car = Car(
+      name: _nameController.text.trim(),
+      category: _selectedCategory,
+      imagePath: _pickedImage!.path,
+      isAssetImage: true,
     );
 
-    Navigator.of(context).pop();
+    widget.onAddCar(car);
+
+    Navigator.of(context).pop(car); // Return car to CategoriesScreen
+
     NotificationService.showCarAddedNotification(_nameController.text.trim());
   }
 

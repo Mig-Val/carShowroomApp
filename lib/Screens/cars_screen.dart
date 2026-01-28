@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:miguel_valentino_showroom/Services/car_hive_service.dart';
 import '../Model/car.dart';
-import '../Data/dummy_data.dart';
 import 'dart:io';
 
 class CarsScreen extends StatelessWidget {
   final Category category;
-
   const CarsScreen({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
-    final carsInCategory = dummyCars
+    List<Car> userCars = CarHiveService.getCars();
+
+    final carsInCategory = userCars
         .where((car) => car.category == category)
         .toList();
 
