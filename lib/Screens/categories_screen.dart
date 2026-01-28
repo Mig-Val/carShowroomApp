@@ -1,22 +1,45 @@
 import 'package:flutter/material.dart';
 import '../Model/car.dart';
 import 'cars_screen.dart';
+import '../Data/dummy_data.dart';
+import 'add_car.dart';
 
-class CategoriesScreen extends StatelessWidget {
+class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({super.key});
+
+  @override
+  State<CategoriesScreen> createState() => _CategoriesScreenState();
+}
+
+class _CategoriesScreenState extends State<CategoriesScreen> {
+  void _openAddCar() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (_) {
+        return AddCar(
+          onAddCar: (car) {
+            setState(() {
+              dummyCars.add(car);
+            });
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final categories = Category.values;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF2B2B2B), // dark gray
+      backgroundColor: const Color(0xFF2B2B2B),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 132, 119, 248),
         title: const Text('Car Showroom'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: _openAddCar,
             icon: const Icon(Icons.add, color: Colors.white),
           ),
         ],
